@@ -8,10 +8,20 @@ function drawLine(src, des) {
     ctx.stroke();
 }
 
-function drawCircle(c) {
+function drawCircle(c,id) {
+    console.log(id)
     ctx.beginPath();
     ctx.arc(c[0], c[1], 10, 0, 2 * Math.PI);
     ctx.fillStyle = "red";
+    if(id==1){
+        ctx.fillStyle = "blue"; 
+    }
+    if(id==2){
+        ctx.fillStyle = "green"; 
+    }
+    if(id==3){
+        ctx.fillStyle = "orange";  
+    }
     ctx.fill();
     ctx.stroke();
 }
@@ -43,7 +53,7 @@ class Agent {
     }
     randomStep() {
         let p=Math.round(Math.random()*10)
-        let jump=200
+        let jump=100
         if(p<5){
             this.q[0] = this.q[0] + Math.floor(Math.random()*jump)
             this.q[1] = this.q[1] + Math.floor(Math.random()*jump)
@@ -52,7 +62,6 @@ class Agent {
             this.q[0] = this.q[0] - Math.floor(Math.random()*jump)
             this.q[1] = this.q[1] - Math.floor(Math.random()*jump)
         }
-
     }
 
 }
@@ -60,8 +69,7 @@ class Agent {
 
 function draw() {
     ctx.clearRect(0, 0, c.width, c.height);
-    drawLine(A[0].q, A[0].goal)
-    drawCircle(A[0].q)
+    drawCircle(A[0].q,A[0].id)
 
     let d = distance(A[0].q, A[0].goal)
     if (d > ep) {
@@ -73,7 +81,7 @@ function draw() {
     }
 
     for (let i = 1; i < num_agent; i++) {
-        drawCircle(A[i].q)
+        drawCircle(A[i].q,A[i].id)
         let flag=1
         for(let j=0;j<num_agent;j++){
             if(i!=j){
@@ -85,6 +93,7 @@ function draw() {
         }
         if(flag){
             A[i].step()
+            A[i].static=0
         }
         else{
             A[i].static+=1
@@ -109,7 +118,7 @@ for (let i = 1; i < num_agent; i++) {
     let tempy = Math.floor(Math.random() * c.height)
     let tempvx = Math.floor(Math.random() * 10)
     let tempvy = Math.floor(Math.random() * 10)
-    let temp = new Agent(i+1, [[tempx, tempy], [0,0]], [tempvx, tempvy])
+    let temp = new Agent(i, [[tempx, tempy], [0,0]], [tempvx, tempvy])
     A.push(temp)
 }
 let max_distance=100000
