@@ -20,14 +20,14 @@ function distance(src,des){
     return Math.sqrt(Math.pow((des[0]-src[0]),2)+Math.pow((des[1]-src[1]),2))
 }
 
-var dt=0.5
+var dt=1
 var ep=0.8
+var col=25
 
 class Agent{
-    constructor(des){
-        this.goalid=1
+    constructor(des,v,){
         this.des=des
-        this.v=[2,2]
+        this.v=v
         this.q=des[0].slice()
         this.goal=des[1].slice()
 
@@ -35,31 +35,51 @@ class Agent{
 
     step(){
         let d=distance(this.q,this.goal)
-        console.log(d)
         this.q[0] = this.q[0] + this.v[0] * dt * ((this.goal[0]-this.q[0])/d)
         this.q[1] = this.q[1] + this.v[1] * dt * ((this.goal[1]-this.q[1])/d)
     }
 }
 
-agent=new Agent([[100,100],[100,300],[300,100],[300,300]])
 
 function draw(){
     ctx.clearRect(0, 0, c.width, c.height);
-    drawLine(agent.q,agent.goal)
-    drawCircle(agent.q)
+    drawLine(A[0].q,A[0].goal)
+    drawCircle(A[0].q)
 
-    let d=distance(agent.q,agent.goal)
+    let d=distance(A[0].q,A[0].goal)
     if(d>ep){
-        agent.step()
-        window.requestAnimationFrame(draw)
+        A[0].step()
     }
     else{
-        agent.goalid=(agent.goalid+1)%4
-        agent.goal=agent.des[agent.goalid].slice()
-        window.requestAnimationFrame(draw)
+        goalid=(goalid+1)%4
+        A[0].goal=A[0].des[goalid].slice()
     }
+
+    for(let i=1;i<=3;i++){
+        drawCircle(A[i].q)
+        let d=distance(A[i].q,A[i-1].q)
+        if(d>col){
+            A[i].step()
+        }
+        A[i].goal=A[i-1].q
+        
+    }
+
+    window.requestAnimationFrame(draw)
 }
 
+var goalid=1
+A1=new Agent([[100,100],[100,300],[300,100],[300,300]],[1,1])
+var A=[A1]
+for(let i=1;i<=3;i++){
+
+    let tempx=Math.floor(Math.random()*c.width)
+    let tempy=Math.floor(Math.random()*c.height)
+    let tempvx=Math.floor(Math.random()*10)
+    let tempvy=Math.floor(Math.random()*10)
+    let temp=new Agent([[tempx,tempy],A[i-1].q],[tempvx,tempvy])
+    A.push(temp)
+}
 
 window.requestAnimationFrame(draw)
 
