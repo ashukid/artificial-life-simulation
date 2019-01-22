@@ -8,6 +8,12 @@ function drawLine(src,des){
     ctx.stroke();
 }
 
+function drawArc(c,r,s,e){
+    ctx.beginPath();
+    ctx.arc(c[0], c[1], r, s, e);
+    ctx.stroke(); 
+}
+
 function drawCircle(c){
     ctx.beginPath();
     ctx.arc(c[0], c[1], 10, 0, 2 * Math.PI);
@@ -20,44 +26,35 @@ function distance(src,des){
     return Math.sqrt(Math.pow((des[0]-src[0]),2)+Math.pow((des[1]-src[1]),2))
 }
 
-var dt=2
-var ep=0.5
-
+var dt=0.1
 class Agent{
-    constructor(des){
-        this.goalid=1
-        this.des=des
-        this.v=[2,2]
-        this.q=des[0].slice()
-        this.goal=des[1].slice()
-
+    constructor(q){
+        this.w=0.8
+        this.q=q
     }
 
     step(){
-        let d=distance(this.q,this.goal)
-        this.q[0] = this.q[0] + this.v[0] * dt * ((this.goal[0]-this.q[0])/d)
-        this.q[1] = this.q[1] + this.v[1] * dt * ((this.goal[1]-this.q[1])/d)
+        angle += this.w*dt
+        if(angle>2*Math.PI){
+            angle=0
+        }
+        this.q[0] = centre[0] + r * Math.cos(angle)
+        this.q[1] = centre[1] + r * Math.sin(angle)
     }
 }
 
 
 function draw(){
     ctx.clearRect(0, 0, c.width, c.height);
-    drawLine(agent.q,agent.goal)
     drawCircle(agent.q)
-
-    let d=distance(agent.q,agent.goal)
-    if(d>ep){
-        agent.step()
-        window.requestAnimationFrame(draw)
-    }
-    else{
-        agent.goalid=(agent.goalid+1)%4
-        agent.goal=agent.des[agent.goalid].slice()
-        window.requestAnimationFrame(draw)
-    }
+    agent.step()
+    drawArc(centre,r,start,angle)
+    window.requestAnimationFrame(draw)
 }
 
-agent=new Agent([[100,100]])
+var angle=Math.PI/2
+var start=angle
+var centre=[250,200]
+var r=100
+agent=new Agent([centre[0] + r*Math.cos(angle),centre[1] + r*Math.sin(angle)])
 window.requestAnimationFrame(draw)
-
