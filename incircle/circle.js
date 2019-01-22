@@ -20,41 +20,44 @@ function distance(src,des){
     return Math.sqrt(Math.pow((des[0]-src[0]),2)+Math.pow((des[1]-src[1]),2))
 }
 
-var dt=0.1
-var ep=10
+var dt=2
+var ep=0.5
 
 class Agent{
-    constructor(src,des){
-        this.src=src
+    constructor(des){
+        this.goalid=1
         this.des=des
-        this.v=[10,10]
-        this.q=src.slice()
+        this.v=[2,2]
+        this.q=des[0].slice()
+        this.goal=des[1].slice()
+
     }
 
     step(){
-        let d=distance(this.q,this.des)
-        this.q[0] = this.q[0] + this.v[0] * dt * ((this.des[0]-this.q[0])/d)
-        this.q[1] = this.q[1] + this.v[1] * dt * ((this.des[1]-this.q[1])/d)
+        let d=distance(this.q,this.goal)
+        this.q[0] = this.q[0] + this.v[0] * dt * ((this.goal[0]-this.q[0])/d)
+        this.q[1] = this.q[1] + this.v[1] * dt * ((this.goal[1]-this.q[1])/d)
     }
 }
 
-agent=new Agent([100,100],[300,300])
 
 function draw(){
     ctx.clearRect(0, 0, c.width, c.height);
-    drawLine(agent.src,agent.q)
+    drawLine(agent.q,agent.goal)
     drawCircle(agent.q)
 
-    let d=distance(agent.q,agent.des) 
+    let d=distance(agent.q,agent.goal)
     if(d>ep){
-        window.requestAnimationFrame(draw)
         agent.step()
+        window.requestAnimationFrame(draw)
     }
     else{
-        window.cancelAnimationFrame(draw)
+        agent.goalid=(agent.goalid+1)%4
+        agent.goal=agent.des[agent.goalid].slice()
+        window.requestAnimationFrame(draw)
     }
 }
 
-
+agent=new Agent([[100,100]])
 window.requestAnimationFrame(draw)
 
