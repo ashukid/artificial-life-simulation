@@ -1,4 +1,4 @@
-## Artificial Life Simulation
+##  Available Simulations
 
 1. <a href="atob/index.html">Straight Line Simulation</a>
 
