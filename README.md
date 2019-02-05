@@ -16,8 +16,8 @@
 
 7. <a href="lab1_q1/index.html">Follow Simulation</a>
 
-8. <a href="lab1_q2/index.html">Follow Simulation</a>
+8. <a href="lab1_q2/index.html">Chain Simulation</a>
 
-9. <a href="lab1_q3/index.html">Follow Simulation</a>
+9. <a href="lab1_q3/index.html">Two Chain Simulation</a>
 
-10. <a href="lab1_q4/index.html">Follow Simulation</a>
+10. <a href="lab1_q4/index.html">Multiple chain Simulation</a>
