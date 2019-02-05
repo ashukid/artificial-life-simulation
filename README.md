@@ -14,10 +14,10 @@
 
 6. <a href="clustering/index.html">Clustering Simulation</a>
 
-7. <a href="lab_q1/index.html">Follow Simulation</a>
+7. <a href="lab1_q1/index.html">Follow Simulation</a>
 
-8. <a href="lab_q2/index.html">Follow Simulation</a>
+8. <a href="lab1_q2/index.html">Follow Simulation</a>
 
-9. <a href="lab_q3/index.html">Follow Simulation</a>
+9. <a href="lab1_q3/index.html">Follow Simulation</a>
 
-10. <a href="lab_q4/index.html">Follow Simulation</a>
+10. <a href="lab1_q4/index.html">Follow Simulation</a>
