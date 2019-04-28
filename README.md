@@ -21,3 +21,17 @@
 9. <a href="lab1_q3/index.html">Two Chain Simulation</a>
 
 10. <a href="lab1_q4/index.html">Multiple chain Simulation</a>
+
+11. <a href="lab2_q1/index.html">Cloth Simulation</a>
+
+12. <a href="lab2_q2/index.html">Social Behaviour Simulation</a>
+
+13. <a href="labexam_q1/index.html">Gate Crossing Simulation</a>
+
+14. <a href="labexam_q2/index.html">Continuous Gate Crossing Simulation</a>
+
+15. <a href="labexam_q5/index.html">Gate Crossing with Repulsive Force from Gate</a>
+
+16. <a href="labexam_q8/index.html">Cloth Clamping Simulation</a>
+
+17. <a href="labexam_q9/index.html">Cloth Tearing Simulation</a>
